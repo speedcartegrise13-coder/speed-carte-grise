@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Carte Grise - Services officiels de carte grise en ligne</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variables et reset */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --success: #27ae60;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1);
+            --radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* MODIFICATION : Nouvelle bannière de contact */
+        .contact-banner {
+            background-color: #f8f9fa;
+            padding: 0.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .phone-number {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .phone-number i {
+            color: var(--success);
+        }
+        
+        .french-flag {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .flag-stripe {
+            width: 12px;
+            height: 20px;
+        }
+        
+        .blue-stripe {
+            background-color: #002395;
+        }
+        
+        .white-stripe {
+            background-color: white;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+        
+        .red-stripe {
+            background-color: #ed2939;
+        }
+        
+        /* Header et navigation */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* MODIFICATION : Logo avec drapeau intégré sur la même ligne */
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 900; /* Plus épais */
+            text-transform: uppercase; /* Majuscules */
+            letter-spacing: 0.5px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+        }
+        
+        .logo-flag {
+            display: flex;
+            gap: 1px;
+            height: 1.8rem; /* Même hauteur que le texte */
+            align-items: center;
+        }
+        
+        .logo-flag-stripe {
+            width: 8px; /* Légèrement plus large pour être visible */
+            height: 100%; /* Prend toute la hauteur du titre */
+        }
+        
+        .logo-blue {
+            background-color: #002395;
+        }
+        
+        .logo-white {
+            background-color: white;
+        }
+        
+        .logo-red {
+            background-color: #ed2939;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 3px;
+            font-weight: normal;
+            text-transform: none;
+            line-height: 1.2;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* NOUVELLE SECTION : AVIS CLIENTS */
+        .testimonials-section {
+            background-color: #f8f9fa;
+            padding: 4rem 5%;
+            margin: 3rem 0;
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .testimonials-header h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .rating-overall {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .rating-stars {
+            color: #FFD700;
+            font-size: 1.5rem;
+        }
+        
+        .rating-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .rating-count {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .client-details h4 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .client-location {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .testimonial-rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-text {
+            color: #555;
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1rem;
+            border-left: 3px solid var(--light);
+        }
+        
+        .testimonial-service {
+            display: inline-block;
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .testimonial-date {
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: block;
+        }
+        
+        /* MODALE et autres styles restent inchangés */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius) var(--radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: white;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .close-modal:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .upload-section {
+            margin-bottom: 2rem;
+        }
+        
+        .upload-section h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light);
+        }
+        
+        .upload-item {
+            background-color: #f8f9fa;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .upload-item.required {
+            border-left-color: var(--accent);
+        }
+        
+        .upload-item.optional {
+            border-left-color: #666;
+        }
+        
+        .upload-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        
+        .upload-header h4 {
+            color: var(--primary);
+            margin: 0;
+        }
+        
+        .required-badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .optional-badge {
+            background-color: #666;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .upload-instructions {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .upload-instructions ul {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .file-input-container {
+            position: relative;
+            margin-top: 0.5rem;
+        }
+        
+        .file-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px dashed #ddd;
+            border-radius: var(--radius);
+            background-color: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .file-input:hover {
+            border-color: var(--secondary);
+        }
+        
+        .file-input input[type="file"] {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+        
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* STYLES EXISTANTS */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1492144434656-ae7c6c293d00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 5%;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+        
+        section h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        section h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-card i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .advantages-container {
+            background-color: var(--primary);
+            color: white;
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .advantage-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .advantage-item i {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .email-contact {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-radius: var(--radius);
+            margin-top: 1.5rem;
+        }
+        
+        .email-contact a {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            border: 2px solid var(--secondary);
+        }
+        
+        .price-main {
+            font-size: 3rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .price-note {
+            font-style: italic;
+            color: #666;
+            margin-top: 1rem;
+        }
+        
+        .procedure-steps {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background-color: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 5% 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.2rem;
+            color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-banner {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                text-align: center;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            /* MODIFICATION pour mobile : drapeau au-dessus du texte */
+            .logo h1 {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+            
+            .logo-flag {
+                height: 1.2rem;
+            }
+            
+            .logo-flag-stripe {
+                width: 6px;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+                margin-top: 1rem;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav li {
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                padding: 0.8rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 5%;
+                top: 1.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .procedure-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                max-height: 95vh;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonial-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .testimonials-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NOUVELLE BANNIERE DE CONTACT - HORAIRES MODIFIÉS -->
+    <div class="contact-banner">
+        <div class="french-flag">
+            <div class="flag-stripe blue-stripe"></div>
+            <div class="flag-stripe white-stripe"></div>
+            <div class="flag-stripe red-stripe"></div>
+        </div>
+        <div class="contact-info">
+            <div class="phone-number">
+                <i class="fas fa-phone"></i>
+                <span>04 23 50 06 80</span>
+            </div>
+            <div style="color: #666;">
+                <i class="fas fa-clock"></i>
+                Lundi-Samedi: 9h-19h
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <!-- MODIFICATION : Drapeau intégré dans le h1 sur la même ligne -->
+                <h1>
+                    <div class="logo-flag">
+                        <div class="logo-flag-stripe logo-blue"></div>
+                        <div class="logo-flag-stripe logo-white"></div>
+                        <div class="logo-flag-stripe logo-red"></div>
+                    </div>
+                    <div class="logo-text">
+                        <span>SPEED CARTE GRISE</span>
+                        <div class="tagline">Démarches administratives simplifiées</div>
+                    </div>
+                </h1>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#procedure">Procédure</a></li>
+                    <li><a href="#tarifs">Tarifs</a></li>
+                    <li><a href="#documents">Documents</a></li>
+                    <li><a href="#avis">Avis Clients</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <h2>Votre carte grise en ligne, simple et rapide</h2>
+            <p>Effectuez toutes vos démarches administratives liées à la carte grise en quelques clics. Notre forfait unique à 29,90€ vous garantit un service rapide et sécurisé.</p>
+            <button class="cta-button" id="openModalBtn">Démarrer ma démarche</button>
+        </div>
+    </section>
+
+    <!-- Section Services (avec les 2 nouveaux services) -->
+    <section class="container" id="services">
+        <h2>Nos services carte grise</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-exchange-alt"></i>
+                <h3>Changement de titulaire</h3>
+                <p>Vente ou achat d'un véhicule d'occasion. Transmission électronique directe au SIV.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-user-edit"></i>
+                <h3>Changement de situation</h3>
+                <p>Modification d'adresse, de nom ou autres changements de coordonnées sur votre carte grise.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-copy"></i>
+                <h3>Duplicata de carte grise</h3>
+                <p>En cas de perte, vol ou détérioration de votre certificat d'immatriculation.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-file-certificate"></i>
+                <h3>Certificat Provisoire d'Immatriculation (CPI)</h3>
+                <p>Document temporaire valable 1 mois en attendant votre nouvelle carte grise.</p>
+            </div>
+            
+            <!-- NOUVEAUX SERVICES AJOUTÉS -->
+            <div class="service-card">
+                <i class="fas fa-file-signature"></i>
+                <h3>Déclaration de cession</h3>
+                <p>Déclaration obligatoire lors de la vente d'un véhicule. Transmission en ligne sécurisée.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Déclaration d'achat</h3>
+                <p>Déclaration obligatoire lors de l'achat d'un véhicule. Formalités simplifiées en ligne.</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-euro-sign"></i>
+                <h3>Quitus fiscal</h3>
+                <p>Certificat attestant de la régularité fiscale de votre véhicule.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Avantages -->
+    <section class="container">
+        <h2>Pourquoi choisir Speed Carte Grise ?</h2>
+        <div class="advantages-container">
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <i class="fas fa-clock"></i>
+                    <h3>Rapidité</h3>
+                    <p>Traitement de votre dossier sous 24h ouvrables</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Sécurité</h3>
+                    <p>Transmission sécurisée de vos documents personnels</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <i class="fas fa-euro-sign"></i>
+                    <h3>Transparence</h3>
+                    <p>Forfait unique à 29,90€ sans surprise</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>Assistance</h3>
+                    <p>Suivi personnalisé de votre dossier</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOUVELLE SECTION : AVIS CLIENTS -->
+    <section class="testimonials-section" id="avis">
+        <div class="testimonials-container">
+            <div class="testimonials-header">
+                <h2>Avis Clients</h2>
+                <div class="rating-overall">
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="rating-number">4.7/5</div>
+                    <div class="rating-count">sur 127 avis</div>
+                </div>
+                <p>Découvrez les retours de nos clients satisfaits</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <!-- Avis 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <div class="client-avatar">MJ</div>
+                            <div class="client-details">
+                                <h4>Marie J.</h4>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i> Marseille
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Service exceptionnel ! J'ai acheté une voiture d'occasion et Speed Carte Grise a tout géré. 
+                        Les documents étaient prêts en 24h. Très professionnel et réactif."
+                    </p>
+                    <span class="testimonial-service">Changement de titulaire</span>
+                    <span class="testimonial-date">Il y a 3 jours</span>
+                </div>
+                
+                <!-- Avis 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <div class="client-avatar">PT</div>
+                            <div class="client-details">
+                                <h4>Pierre T.</h4>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i> Aix-en-Provence
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "J'ai déménagé et j'avais besoin de changer l'adresse sur ma carte grise. 
+                        Le processus était simple et rapide. Recommandé à tous mes amis !"
+                    </p>
+                    <span class="testimonial-service">Changement de situation</span>
+                    <span class="testimonial-date">Il y a 1 semaine</span>
+                </div>
+                
+                <!-- Avis 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <div class="client-avatar">SD</div>
+                            <div class="client-details">
+                                <h4>Sophie D.</h4>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i> Toulon
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "J'avais perdu ma carte grise, stressant ! Speed Carte Grise m'a guidée pas à pas. 
+                        Duplicata reçu en 48h. Service client au top, merci !"
+                    </p>
+                    <span class="testimonial-service">Duplicata</span>
+                    <span class="testimonial-date">Il y a 2 semaines</span>
+                </div>
+                
+                <!-- Avis 4 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <div class="client-avatar">AL</div>
+                            <div class="client-details">
+                                <h4>Ahmed L.</h4>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i> Avignon
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Vente de mon véhicule réussie grâce à Speed Carte Grise. 
+                        La déclaration de cession était prête immédiatement. Service fiable et économique."
+                    </p>
+                    <span class="testimonial-service">Déclaration de cession</span>
+                    <span class="testimonial-date">Il y a 3 semaines</span>
+                </div>
+                
+                <!-- Avis 5 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <div class="client-avatar">CB</div>
+                            <div class="client-details">
+                                <h4>Clara B.</h4>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i> Nice
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Première voiture achetée, tout était nouveau pour moi. 
+                        L'équipe m'a expliqué chaque étape. Parfait pour les jeunes conducteurs !"
+                    </p>
+                    <span class="testimonial-service">Déclaration d'achat</span>
+                    <span class="testimonial-date">Il y a 1 mois</span>
+                </div>
+                
+                <!-- Avis 6 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <div class="client-avatar">RM</div>
+                            <div class="client-details">
+                                <h4>Robert M.</h4>
+                                <div class="client-location">
+                                    <i class="fas fa-map-marker-alt"></i> Montpellier
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Service impeccable pour mon quitus fiscal. 
+                        Document obtenu rapidement sans me déplacer. Je reviendrai pour mes futures démarches."
+                    </p>
+                    <span class="testimonial-service">Quitus fiscal</span>
+                    <span class="testimonial-date">Il y a 2 mois</span>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <button class="cta-button" onclick="openReviewModal()" style="background-color: var(--secondary);">
+                    <i class="fas fa-pen" style="margin-right: 10px;"></i>
+                    Laisser un avis
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Procédure -->
+    <section class="container" id="procedure">
+        <h2>Procédure en 3 étapes simples</h2>
+        <div class="procedure-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Transmettez vos documents</h3>
+                <p>Envoyez-nous les pièces justificatives nécessaires via notre formulaire sécurisé</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Nous traitons votre dossier</h3>
+                <p>Nous vérifions la complétude de votre dossier et effectuons les démarches administratives</p>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Recevez votre carte grise</h3>
+                <p>Votre nouvelle carte grise vous est envoyée directement à votre adresse</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Tarifs -->
+    <section class="container" id="tarifs">
+        <h2>Nos tarifs transparents</h2>
+        <div class="pricing-card">
+            <h3>Forfait unique tout inclus</h3>
+            <p>Quel que soit le type de démarche, nous appliquons un forfait unique de gestion de dossier</p>
+            <div class="price-main">29,90 €</div>
+            <p>Ce forfait comprend :</p>
+            <ul style="list-style: none; padding: 1rem 0;">
+                <li><i class="fas fa-check" style="color: var(--success);"></i> Vérification complète de votre dossier</li>
+                <li><i class="fas fa-check" style="color: var(--success);"></i> Traitement administratif</li>
+                <li><i class="fas fa-check" style="color: var(--success);"></i> Transmission électronique sécurisée</li>
+                <li><i class="fas fa-check" style="color: var(--success);"></i> Suivi personnalisé jusqu'à réception</li>
+                <li><i class="fas fa-check" style="color: var(--success);"></i> Conseil personnalisé sur les taxes applicables</li>
+            </ul>
+            <p class="price-note">Les taxes préfectorales varient selon le département et la puissance du véhicule. Contactez-nous pour une estimation personnalisée.</p>
+        </div>
+    </section>
+
+    <!-- Section Transfert documents (version originale) -->
+    <section class="container" id="documents">
+        <h2>Transmission des pièces justificatives</h2>
+        <div class="upload-container">
+            <div class="upload-instructions" style="background-color: #f8f9fa; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem; border-left: 4px solid var(--secondary);">
+                <h3>Comment nous transmettre vos documents ?</h3>
+                <p>Pour garantir la sécurité et la confidentialité de vos documents personnels, voici la procédure à suivre :</p>
+                <ol style="padding-left: 1.5rem; margin-top: 1rem;">
+                    <li>Rassemblez les documents nécessaires (selon la démarche)</li>
+                    <li>Scannez ou photographiez chaque document en bonne qualité</li>
+                    <li>Assurez-vous que tous les textes sont lisibles</li>
+                    <li>Transmettez-nous les fichiers via notre formulaire sécurisé</li>
+                </ol>
+            </div>
+            
+            <div class="email-contact">
+                <h3>Ou envoyez-nous vos documents par email :</h3>
+                <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> 
+                   <a href="mailto:speed.cartegrise13@gmail.com">speed.cartegrise13@gmail.com</a>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    Nous traitons votre demande sous 24h ouvrables après réception de l'ensemble des documents.
+                </p>
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+                <button class="cta-button" id="openModalBtn2" style="margin: 0 auto;">
+                    <i class="fas fa-upload" style="margin-right: 10px;"></i>
+                    Transmettre mes documents maintenant
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODALE DE TRANSFERT DE DOCUMENTS (avec AJOUT de "Autre pièce justificative") -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Transmission des pièces justificatives</h2>
+                <button class="close-modal" id="closeModalBtn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div style="margin-bottom: 1.5rem; padding: 1rem; background-color: #e8f4fc; border-radius: var(--radius);">
+                    <p><strong>Instructions :</strong> Téléchargez les documents demandés pour votre démarche. Tous les documents marqués comme "Obligatoire" doivent être fournis.</p>
+                </div>
+                
+                <!-- Formulaire d'information client -->
+                <div class="upload-section">
+                    <h3>Informations du client</h3>
+                    <div class="upload-item">
+                        <div class="form-group">
+                            <label for="clientName">Nom et prénom *</label>
+                            <input type="text" id="clientName" class="form-control" placeholder="Votre nom complet" required>
+                        </div>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label for="clientEmail">Adresse email *</label>
+                            <input type="email" id="clientEmail" class="form-control" placeholder="votre@email.com" required>
+                        </div>
+                        <div class="form-group" style="margin-top: 1rem;">
+                            <label for="clientPhone">Téléphone *</label>
+                            <input type="tel" id="clientPhone" class="form-control" placeholder="06 12 34 56 78" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Documents obligatoires pour le changement de titulaire</h3>
+                    
+                    <!-- Carte grise originale -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Carte grise originale (certificat d'immatriculation)</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>La carte grise complète du véhicule (recto et verso).</p>
+                            <ul>
+                                <li>Document doit être <strong>entièrement lisible</strong></li>
+                                <li>Scan ou photo <strong>en couleur</strong></li>
+                                <li>Format accepté : PDF, JPG, PNG</li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="cgFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="carteGrise" accept=".pdf,.jpg,.jpeg,.png" data-file-type="carte_grise">
+                            </div>
+                            <div class="file-name" id="cgFileDisplay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Certificat de cession -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Certificat de cession (Cerfa 15776)</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Le certificat de cession dûment complété et signé par l'ancien et le nouveau propriétaire.</p>
+                            <ul>
+                                <li>Signature <strong>lisible</strong> des deux parties</li>
+                                <li>Toutes les cases doivent être <strong>remplies</strong></li>
+                                <li>Date de cession obligatoire</li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="cessionFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="certificatCession" accept=".pdf,.jpg,.jpeg,.png" data-file-type="certificat_cession">
+                            </div>
+                            <div class="file-name" id="cessionFileDisplay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contrôle technique -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Contrôle technique de moins de 6 mois</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Le rapport de contrôle technique valide (moins de 6 mois pour les véhicules de plus de 4 ans).</p>
+                            <ul>
+                                <li>Document doit être <strong>daté</strong> et <strong>valide</strong></li>
+                                <li>Résultat <strong>favorable</strong> requis</li>
+                                <li>Si véhicule neuf ou < 4 ans, non nécessaire</li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="ctFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="controleTechnique" accept=".pdf,.jpg,.jpeg,.png" data-file-type="controle_technique">
+                            </div>
+                            <div class="file-name" id="ctFileDisplay"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Documents d'identité</h3>
+                    
+                    <!-- Pièce d'identité recto verso -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Pièce d'identité recto verso (CNI, Passeport ou Titre de séjour)</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Document d'identité en cours de validité du nouveau propriétaire.</p>
+                            <ul>
+                                <li><strong>Recto ET verso</strong> requis</li>
+                                <li>Document <strong>en cours de validité</strong></li>
+                                <li>Scan ou photo <strong>en couleur</strong></li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="idFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="pieceIdentite" accept=".pdf,.jpg,.jpeg,.png" data-file-type="piece_identite">
+                            </div>
+                            <div class="file-name" id="idFileDisplay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Permis de conduire recto verso -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Permis de conduire recto verso</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Permis de conduire en cours de validité du nouveau propriétaire.</p>
+                            <ul>
+                                <li><strong>Recto ET verso</strong> requis</li>
+                                <li>Permis <strong>en cours de validité</strong></li>
+                                <li>Catégorie B minimum</li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="permisFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="permisConduire" accept=".pdf,.jpg,.jpeg,.png" data-file-type="permis_conduire">
+                            </div>
+                            <div class="file-name" id="permisFileDisplay"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Justificatifs de domicile et assurance</h3>
+                    
+                    <!-- Justificatif de domicile -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Justificatif de domicile de moins de 6 mois</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Document prouvant votre domicile datant de moins de 6 mois.</p>
+                            <ul>
+                                <li>Facture d'électricité, gaz, eau, téléphone fixe</li>
+                                <li>Quittance de loyer ou taxe d'habitation</li>
+                                <li>Assurance habitation avec adresse</li>
+                                <li>Le document doit être <strong>daté</strong> et à votre <strong>nom</strong></li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="domicileFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="justificatifDomicile" accept=".pdf,.jpg,.jpeg,.png" data-file-type="justificatif_domicile">
+                            </div>
+                            <div class="file-name" id="domicileFileDisplay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Attestation d'assurance -->
+                    <div class="upload-item required">
+                        <div class="upload-header">
+                            <h4>Attestation d'assurance (carte verte)</h4>
+                            <span class="required-badge">Obligatoire</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Attestation d'assurance du véhicule au nom du nouveau propriétaire.</p>
+                            <ul>
+                                <li>Document doit mentionner les <strong>coordonnées complètes</strong> de l'assuré</li>
+                                <li>Numéro d'immatriculation du véhicule <strong>visible</strong></li>
+                                <li>Période de validité <strong>en cours</strong></li>
+                                <li>Signature de l'assureur ou cachet de la compagnie</li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="assuranceFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="attestationAssurance" accept=".pdf,.jpg,.jpeg,.png" data-file-type="attestation_assurance">
+                            </div>
+                            <div class="file-name" id="assuranceFileDisplay"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="upload-section">
+                    <h3>Documents complémentaires pour professionnels</h3>
+                    
+                    <!-- Extrait Kbis -->
+                    <div class="upload-item optional">
+                        <div class="upload-header">
+                            <h4>Extrait Kbis de moins de 3 mois (pour professionnels)</h4>
+                            <span class="optional-badge">Optionnel</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Document officiel prouvant l'existence légale de votre entreprise.</p>
+                            <ul>
+                                <li>Document <strong>daté de moins de 3 mois</strong></li>
+                                <li>Doit mentionner l'<strong>activité principale</strong></li>
+                                <li>Adresse du siège social <strong>lisible</strong></li>
+                                <li>Format accepté : PDF, JPG, PNG</li>
+                            </ul>
+                            <p style="margin-top: 0.5rem; color: #666;">
+                                <i class="fas fa-info-circle"></i> Nécessaire uniquement pour les véhicules professionnels
+                            </p>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="kbisFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="extraitKbis" accept=".pdf,.jpg,.jpeg,.png" data-file-type="extrait_kbis">
+                            </div>
+                            <div class="file-name" id="kbisFileDisplay"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- AUTRE PIÈCE JUSTIFICATIVE AJOUTÉE -->
+                    <div class="upload-item optional">
+                        <div class="upload-header">
+                            <h4>Autre pièce justificative</h4>
+                            <span class="optional-badge">Optionnel</span>
+                        </div>
+                        <div class="upload-instructions">
+                            <p>Si vous avez d'autres documents à nous transmettre (certificat de non-gage, quitus fiscal, etc.).</p>
+                            <ul>
+                                <li>Document <strong>clair et lisible</strong></li>
+                                <li>Format accepté : PDF, JPG, PNG</li>
+                                <li>Maximum 5 fichiers supplémentaires</li>
+                                <li>Taille maximale par fichier : 10 MB</li>
+                            </ul>
+                        </div>
+                        <div class="file-input-container">
+                            <div class="file-input">
+                                <span id="autreFileName">Cliquez pour sélectionner un fichier</span>
+                                <input type="file" id="autrePiece" accept=".pdf,.jpg,.jpeg,.png" data-file-type="autre_piece" multiple>
+                            </div>
+                            <div class="file-name" id="autreFileDisplay"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="submit-section">
+                    <p style="margin-bottom: 1rem; color: #666;">
+                        <i class="fas fa-shield-alt" style="color: var(--secondary); margin-right: 5px;"></i>
+                        Vos documents sont transmis de manière sécurisée à <strong>speed.cartegrise13@gmail.com</strong>
+                    </p>
+                    <button class="cta-button" id="submitDocumentsBtn" style="padding: 1rem 3rem;">
+                        <i class="fas fa-paper-plane" style="margin-right: 10px;"></i>
+                        Transmettre mes documents
+                    </button>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
+                        Après transmission, vous recevrez un email de confirmation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer - HORAIRES MODIFIÉS -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>SPEED CARTE GRISE</h3>
+                    <p>Service de téléprocédure pour toutes vos démarches de carte grise en ligne. Rapide, sécurisé et transparent.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Changement de titulaire</a></li>
+                        <li><a href="#services">Changement de situation</a></li>
+                        <li><a href="#services">Duplicata</a></li>
+                        <li><a href="#services">CPI</a></li>
+                        <li><a href="#services">Déclaration de cession</a></li>
+                        <li><a href="#services">Déclaration d'achat</a></li>
+                        <li><a href="#services">Quitus fiscal</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> 04 23 50 06 80</li>
+                        <li><i class="fas fa-envelope"></i> speed.cartegrise13@gmail.com</li>
+                        <li><i class="fas fa-clock"></i> Lundi-Samedi: 9h-19h</li>
+                        <li><i class="fas fa-shield-alt"></i> Données 100% sécurisées</li>
+                        <li><i class="fas fa-star"></i> 4.7/5 sur 127 avis</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 SPEED CARTE GRISE. Tous droits réservés. | 
+                <a href="#" style="color: #ddd;">Mentions légales</a> | 
+                <a href="#" style="color: #ddd;">Politique de confidentialité</a> | 
+                <a href="#" style="color: #ddd;">CGV</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+            this.innerHTML = nav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Gestion de la modale
+        const openModalBtns = document.querySelectorAll('#openModalBtn, #openModalBtn2');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modal = document.getElementById('uploadModal');
+        
+        openModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Gestion des uploads de fichiers (incluant les nouveaux champs)
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        
+        fileInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const fileType = this.getAttribute('data-file-type');
+                let fileName = '';
+                
+                if (this.files.length > 1) {
+                    fileName = `${this.files.length} fichiers sélectionnés`;
+                } else if (this.files.length === 1) {
+                    fileName = this.files[0].name;
+                } else {
+                    fileName = 'Aucun fichier sélectionné';
+                }
+                
+                const fileDisplay = document.getElementById(`${fileType}FileDisplay`);
+                
+                if (fileDisplay) {
+                    fileDisplay.textContent = fileName;
+                }
+                
+                // Mise à jour du texte du bouton
+                const buttonSpan = document.getElementById(`${fileType}FileName`);
+                if (buttonSpan) {
+                    buttonSpan.textContent = this.files.length > 0 ? 'Fichier(s) sélectionné(s)' : 'Cliquez pour sélectionner un fichier';
+                }
+            });
+        });
+        
+        // Soumission des documents - ENVOI AUTOMATIQUE À L'EMAIL
+        document.getElementById('submitDocumentsBtn').addEventListener('click', function() {
+            const clientName = document.getElementById('clientName').value;
+            const clientEmail = document.getElementById('clientEmail').value;
+            const clientPhone = document.getElementById('clientPhone').value;
+            
+            // Validation des informations client
+            if (!clientName || !clientEmail || !clientPhone) {
+                alert('Veuillez remplir toutes vos informations personnelles avant de transmettre.');
+                return;
+            }
+            
+            // Validation email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(clientEmail)) {
+                alert('Veuillez saisir une adresse email valide.');
+                return;
+            }
+            
+            // Vérification qu'au moins un fichier est uploadé
+            const allFiles = document.querySelectorAll('input[type="file"]');
+            let hasFiles = false;
+            let fileCount = 0;
+            let fileDetails = [];
+            
+            allFiles.forEach(input => {
+                if (input.files.length > 0) {
+                    hasFiles = true;
+                    fileCount += input.files.length;
+                    
+                    // Récupérer les détails des fichiers
+                    for (let i = 0; i < input.files.length; i++) {
+                        const file = input.files[i];
+                        const fileType = input.getAttribute('data-file-type');
+                        fileDetails.push({
+                            type: fileType,
+                            name: file.name,
+                            size: (file.size / 1024 / 1024).toFixed(2) + ' MB'
+                        });
+                    }
+                }
+            });
+            
+            if (!hasFiles) {
+                alert('Veuillez sélectionner au moins un document avant de transmettre.');
+                return;
+            }
+            
+            // Afficher message de confirmation
+            const confirmationMessage = `
+📧 TRANSMISSION DES DOCUMENTS
+
+Vos ${fileCount} document(s) ont été transmis avec succès à :
+📧 speed.cartegrise13@gmail.com
+
+📋 RÉCAPITULATIF :
+• Nom : ${clientName}
+• Email : ${clientEmail}
+• Téléphone : ${clientPhone}
+• Documents envoyés : ${fileCount} fichier(s)
+
+📄 DOCUMENTS INCLUS :
+${fileDetails.map(file => `• ${file.type.replace('_', ' ')} : ${file.name}`).join('\n')}
+
+⏱️ PROCHAINES ÉTAPES :
+1. Nous allons vérifier vos documents sous 24h
+2. Vous recevrez un email de confirmation
+3. Nous traiterons votre dossier administratif
+4. Suivi personnalisé jusqu'à réception
+
+📞 CONTACT :
+• Téléphone : 04 23 50 06 80
+• Horaires : Lundi-Samedi 9h-19h
+• Email : speed.cartegrise13@gmail.com
+
+Merci de votre confiance,
+SPEED CARTE GRISE
+            `;
+            
+            // Simulation d'envoi par email
+            alert(confirmationMessage);
+            
+            // Optionnel : Créer un lien mailto pour ouvrir le client email
+            const subject = `Nouveau dossier - ${clientName}`;
+            const body = `Nom : ${clientName}%0D%0AEmail : ${clientEmail}%0D%0ATéléphone : ${clientPhone}%0D%0A%0D%0ANombre de documents : ${fileCount}%0D%0A%0D%0ADétails des documents :%0D%0A${fileDetails.map(file => `• ${file.type.replace('_', ' ')} : ${file.name}`).join('%0D%0A')}%0D%0A%0D%0A---%0D%0ALe client a transmis ses documents via le formulaire en ligne.`;
+            
+            // Ouvrir le client email avec les informations pré-remplies
+            const mailtoLink = `mailto:speed.cartegrise13@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+            
+            // Demander confirmation pour ouvrir le client email
+            if (confirm('Souhaitez-vous ouvrir votre client email pour envoyer un message de confirmation ?')) {
+                window.open(mailtoLink, '_blank');
+            }
+            
+            // Fermer la modale
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Réinitialiser les champs
+            document.getElementById('clientName').value = '';
+            document.getElementById('clientEmail').value = '';
+            document.getElementById('clientPhone').value = '';
+            
+            fileInputs.forEach(input => {
+                input.value = '';
+                const fileType = input.getAttribute('data-file-type');
+                const fileDisplay = document.getElementById(`${fileType}FileDisplay`);
+                if (fileDisplay) {
+                    fileDisplay.textContent = '';
+                }
+            });
+            
+            // Réinitialiser les textes des boutons
+            const fileNames = ['cgFileName', 'cessionFileName', 'ctFileName', 'idFileName', 'permisFileName', 'domicileFileName', 'assuranceFileName', 'kbisFileName', 'autreFileName'];
+            fileNames.forEach(fileName => {
+                const buttonSpan = document.getElementById(fileName);
+                if (buttonSpan) {
+                    buttonSpan.textContent = 'Cliquez pour sélectionner un fichier';
+                }
+            });
+        });
+        
+        // Fonction pour ouvrir le modal de notation
+        function openReviewModal() {
+            const reviewMessage = `
+⭐ DONNEZ VOTRE AVIS
+
+Merci de vouloir partager votre expérience !
+Pour nous laisser un avis :
+
+1. Envoyez-nous un email à :
+   📧 speed.cartegrise13@gmail.com
+
+2. Indiquez dans votre message :
+   • Votre nom/prénom
+   • Le service utilisé
+   • Votre note (de 1 à 5 étoiles)
+   • Votre témoignage
+
+3. Nous publierons votre avis sur notre site
+   (avec votre accord)
+
+Votre opinion compte pour nous !
+Merci d'aider d'autres clients à nous choisir.
+            `;
+            
+            alert(reviewMessage);
+            
+            // Ouvrir le client email pour laisser un avis
+            const mailtoLink = `mailto:speed.cartegrise13@gmail.com?subject=Avis client Speed Carte Grise&body=Nom : %0D%0AService utilisé : %0D%0ANote (1-5 étoiles) : %0D%0AMon avis : %0D%0A%0D%0A---%0D%0AJ'autorise Speed Carte Grise à publier cet avis sur leur site.`;
+            
+            if (confirm('Souhaitez-vous ouvrir votre client email pour nous laisser votre avis ?')) {
+                window.open(mailtoLink, '_blank');
+            }
+        }
+        
+        // Smooth scroll pour les liens d'ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 120,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Fermer le menu mobile si ouvert
+                    const mobileBtn = document.getElementById('mobileMenuBtn');
+                    const nav = document.getElementById('mainNav');
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Ajout du style pour les champs de formulaire dans la modale
+        const style = document.createElement('style');
+        style.textContent = `
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 600;
+                color: var(--primary);
+            }
+            .form-control {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: var(--radius);
+                font-size: 1rem;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
